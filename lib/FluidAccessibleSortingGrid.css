@@ -1,0 +1,41 @@
+.reorderer_container {
+  padding: 20px;
+  border: 1px dashed red;
+  overflow: hidden;
+  background-color: #eee;
+  width: 510px;
+}
+.flc-reorderer-movable {
+  background-color: lightyellow;
+  width: 155px;
+  float: left;
+  margin: 0 10px 10px 0;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.fl-reorderer-movable-default {
+  border: 2px solid #ddd;
+}
+.fl-reorderer-movable-hover {
+  border: 2px solid #666;
+}
+.fl-reorderer-movable-dragging {
+    background-color: white;
+}
+.fl-reorderer-movable-selected {
+  border: 2px solid #666;
+  background-color: #ddd;
+}
+.fl-reorderer-movable-avatar {
+    background-color: blue;
+    opacity: 0.75;
+}
+.fl-reorderer-dropMarker{
+  height: 50px !important;
+  width: 4px;
+  background-color: green;
+}
+
+
+

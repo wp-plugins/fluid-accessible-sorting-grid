@@ -3,9 +3,9 @@
 Plugin Name: Fluid Accessible Sorting Grid
 Plugin URI: http://wordpress.org/extend/plugins/fluid-accessible-sorting-grid/
 Description: WAI-ARIA Enabled Sorting Grid Plugin for Wordpress
-Author: Theofanis Oikonomou, Kontotasiou Dionysia
-Version: 2.0
-Author URI: http://www.iti.gr/iti/people/ThOikon.html, http://www.iti.gr/iti/people/Dionisia_Kontotasiou.html
+Author: Kontotasiou Dionysia
+Version: 3.0
+Author URI: http://www.iti.gr/iti/people/Dionisia_Kontotasiou.html
 */
 include_once 'getRecentPosts.php';
 include_once 'getRecentComments.php';
@@ -17,14 +17,23 @@ function FluidAccessibleSortingGrid_init() {
     register_sidebar_widget(__('Fluid Accessible Sorting Grid'), 'widget_FluidAccessibleSortingGrid');
     register_widget_control(   'Fluid Accessible Sorting Grid', 'FluidAccessibleSortingGrid_control', 200, 200 );
     if ( !is_admin() && is_active_widget('widget_FluidAccessibleSortingGrid') ) {
+		
+		
         wp_register_script('InfusionAll', ( get_bloginfo('wpurl') . '/wp-content/plugins/fluid-accessible-sorting-grid/lib/InfusionAll.js'));
         wp_enqueue_script('InfusionAll');
+		
+		wp_register_script('reorderer', ( get_bloginfo('wpurl') . '/wp-content/plugins/fluid-accessible-sorting-grid/lib/reorderer.js'));
+        wp_enqueue_script('reorderer');
+
 
         wp_register_script('FluidAccessibleSortingGrid', ( get_bloginfo('wpurl') . '/wp-content/plugins/fluid-accessible-sorting-grid/lib/FluidAccessibleSortingGrid.js'));
         wp_enqueue_script('FluidAccessibleSortingGrid');
 
         wp_register_style('FluidAccessibleSortingGrid_css', ( get_bloginfo('wpurl') . '/wp-content/plugins/fluid-accessible-sorting-grid/lib/FluidAccessibleSortingGrid.css'));
         wp_enqueue_style('FluidAccessibleSortingGrid_css');
+		
+		wp_register_script('reorderer_css', ( get_bloginfo('wpurl') . '/wp-content/plugins/fluid-accessible-sorting-grid/lib/reorderer.css'));
+        wp_enqueue_script('reorderer_css');
     }
 }
 
@@ -69,42 +78,20 @@ function FluidAccessibleSortingGridContent() {
         );
     }
 
-echo '<div class="reorderer_container">    
-  <div class="flc-reorderer-movable" id="box0">
-    <div class="caption">' . $options['recentPosts'] . '
-      <ul>
-        ' . $recentPosts . '
-      </ul>
-    </div>
-  </div>
-  <div class="flc-reorderer-movable" id="box1">
-    <div class="caption">' . $options['recentComments'] . '
-      <ul>
-        ' . $recentComments . '
-      </ul>
-    </div>
-  </div>
-  <div class="flc-reorderer-movable" id="box2">
-    <div class="caption">' . $options['categories'] . '
-      <ul>
-        ' . $categories . '
-      </ul>
-    </div>
-  </div>
-  <div class="flc-reorderer-movable" id="box4">
-    <div class="caption">' . $options['meta'] . '
-      <ul>
-        ' . $meta . '
-      </ul>
-    </div>
-  </div>
-</div>
-
-
+echo '<div class="demo-gridReorderer-container">
+        <div class="fl-container-flex">
+             
+            <div class="flc-reorderer-movable">                               
+            <ul class="demoSelector-gridReorderer-alphabetGrid demo-gridReorderer-alphabetGrid fl-focus">
+                <div class="flc-reorderer-movable">' . $options['recentPosts'] . ' ' . $recentPosts . '</div>
+                <div class="flc-reorderer-movable">' . $options['recentComments'] . ' ' . $recentComments . '</div>           
+                <div class="flc-reorderer-movable">' . $options['categories'] . ' ' . $categories . '</div>
+            </ul>
+        
+        </div>
         <script type="text/javascript">
             demo.initGridReorderer();
         </script>';
-
 }
 
 function FluidAccessibleSortingGrid_control() {

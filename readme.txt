@@ -1,5 +1,5 @@
 === Fluid Accessible Sorting Grid ===
-Contributors: Theofanis Oikonomou, Kontotasiou Dionysia
+Contributors: Kontotasiou Dionysia
 Tags: accessible, WAI, ARIA, fluid, widgets
 Requires at least: 3.0.1
 Tested up to: 3.3.2
